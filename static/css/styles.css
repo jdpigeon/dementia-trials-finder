@@ -1,0 +1,87 @@
+/*
+A custom Bootstrap 3.1 theme from http://bootply.com\
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+
+colors:
+light: #D9F4FF
+tan: #FEC578
+black: #3A3D3C
+medblue: #ABDFF4
+browd: #C5927D
+grey: #93938B
+
+*/
+
+
+
+html,body{
+  	height:100%;
+}
+
+body{
+  	padding-top:50px; /*padding for navbar*/
+}
+
+.navbar-custom .icon-bar {
+	background-color:#fff;
+}
+
+.navbar-custom {
+	background-color: #3A3D3C;
+	border-color: #93938B;
+	border-width: 4px;
+}
+
+.navbar-custom li>a:hover,.navbar-custom li>a:focus {
+	background-color:#ABDFF4;
+}
+
+.navbar-custom a{
+    color:#D9F4FF;
+}
+
+.navbar-custom .form-control:focus {
+	border-color: #49bfff;
+	outline: 0;
+	-webkit-box-shadow: inset 0 0 0;
+	box-shadow: inset 0 0 0;
+}
+
+#main, #main>.row {
+	height:100%;
+}
+
+#main, h1, h2, h3, h4 {
+
+}
+
+#main, p {
+
+}
+
+#panel-heading {
+
+}
+
+#main>.row {
+    overflow-y:scroll;
+}
+
+#left {
+	height:100%;
+}
+
+#map-canvas {
+	width:33.3333%;
+    height:calc(100% - 0);
+    position:absolute;
+    right:16px;
+    top:50px;
+    bottom:0;
+    overflow:hidden;
+}
