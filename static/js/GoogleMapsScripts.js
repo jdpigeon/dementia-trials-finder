@@ -3,6 +3,7 @@ var lat;
 var lng;
 var map;
 var markers = [];
+var geocoder = new google.maps.Geocoder;
 
 function locationHandler(position)
 {
@@ -33,10 +34,21 @@ function addMarker(results) {
   markers.push(marker);
 }
 
-function showMarkers() {
-  for (var i = 0; i < markers.length; i++) {
-    //var marker = new google.maps.Marker(markers[i]);
-  }
+function sendUserCity () {
+  geocoder.geocode({'location': map.getCenter()}, function(results, status) {
+    if (status === 'OK') {
+      if (results[1]) {
+
+        var city = results[1].address_components[2].long_name;
+        console.log(city);
+
+        $.post( "/postmethod", {
+          javascript_data: JSON.stringify(city)
+        });
+
+      }
+    }
+  });
 }
 
 
@@ -56,6 +68,7 @@ function createSearch() {
   // more details for that place.
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
+
 
     if (places.length == 0) {
       return;
@@ -77,10 +90,12 @@ function createSearch() {
       }
     });
     map.fitBounds(bounds);
+    sendUserCity();
   });
 }
 
-$(document).ready(function(){
+
+$(document).ready(function() {
   navigator.geolocation.getCurrentPosition(locationHandler);
   google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -102,6 +117,13 @@ $(document).ready(function(){
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
     createSearch();
+    placeVisibleMarkers();
+
+    map.addListener(['center_changed'], function() {
+      sendUserCity();
+    });
 
   };
+
+
 });

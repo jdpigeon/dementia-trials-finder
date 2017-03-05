@@ -32,8 +32,7 @@ var values = [{name: 'Phase 3 Study of Aducanumab (BIIB037) in Early Alzheimers 
 
 var trialsList = new List('study-list', options, values);
 
-trialsList.on('updated', function () {
-
+function placeVisibleMarkers () {
   deleteMarkers();
 
   // Loops through every visible trial in list
@@ -57,6 +56,11 @@ trialsList.on('updated', function () {
     var service = new google.maps.places.PlacesService(map);
     service.textSearch(request, callback);
   });
+
+}
+
+trialsList.on('updated', function () {
+  placeVisibleMarkers();
 });
 
 

@@ -1,38 +1,34 @@
 from flask import Flask, render_template, request
-from flask.ext.mysql import MySQL
-
+from flask.ext.sqlalchemy import SQLAlchemy
+import json
+import os
 
 app = Flask(__name__)
 
-# MySQL configurations
-mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'pikmin'
-app.config['MYSQL_DATABASE_DB'] = 'we4dementia'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
-conn = mysql.connect()
-cursor = conn.cursor()
+
+# Postgres configurations
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://new_user:password@localhost/dementiatrialsdb'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+db = SQLAlchemy(app)
+
 
 
 @app.route("/")
 def main():
+    print('test')
     return render_template('index.html')
     
-# MySQL Functions
-@app.route("/addStudy")
-def addStudy():
-    name = request.args.get('name')
-    identifier = request.args.get('identifier')
-    purpose = request.args.get('purpose')
-    cursor.callproc('sp_createStudy',(name, identifier, purpose))
-    data = cursor.fetchall()
-    if len(data) is 0:
-        conn.commit()
-        print('User created successfully !')
-    else:
-        print('error')
+        
+
+@app.route("/postmethod", methods = ['POST'])
+def get_post_javascript_data():
+    jsdata = request.form['javascript_data']
+    print (json.loads(jsdata)[0])
+    return jsdata
+        
    
     
 if __name__ == "__main__":
     app.run(debug=True)
+    from models import Studies
