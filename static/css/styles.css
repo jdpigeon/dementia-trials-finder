@@ -139,6 +139,20 @@ ul.list {
 	line-height: 20px;
 }
 
+.study-list .eligibility {
+	font-size: 14px;
+	display: block;
+	line-height: 20px;
+}
+
+.study-list .recruitment {
+	font-size: 14px;
+	font-weight: 700;
+	display: block;
+	line-height: 20px;
+}
+
+
 .study-list .purpose {
 	font-size: 14px;
 	display: block;

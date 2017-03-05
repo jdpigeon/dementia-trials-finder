@@ -5,19 +5,25 @@ class Studies(db.Model):
     __tablename__ = 'studies'
 
     id = db.Column(db.Integer, primary_key=True)
+    link = db.Column(db.String())
     name = db.Column(db.Text())
-    url = db.Column(db.String())
     purpose = db.Column(db.Text())
     study_type = db.Column(db.Text())
-    recruiting = db.Column(db.Text())
+    eligibility = db.Column(db.Text())
+    recruiting_status = db.Column(db.Text())
+    contact_name = db.Column(db.Text())
 
 
-    def __init__(self, id, name, url, purpose, study_type, recruiting):
-        self.url = url
+
+    def __init__(self, id, link, name, purpose, study_type, eligibility, recruiting_status, contact_name):
         self.id = id
+        self.link = link
+        self.name = name
         self.purpose = purpose
         self.study_type = study_type
-        self.recruiting = recruiting
+        self.eligibility = eligibility
+        self.recruiting_status = recruiting_status
+        self.contact_name = contact_name
 
     def __repr__(self):
         return '<id {}'.format(self.id)

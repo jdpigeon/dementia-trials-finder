@@ -1,5 +1,6 @@
 from app import db
 from models import Studies
+from models import Locations
 
 # create the database and the database table
 db.create_all()

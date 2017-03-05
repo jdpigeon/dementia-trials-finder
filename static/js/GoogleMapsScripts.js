@@ -23,13 +23,14 @@ function deleteMarkers() {
   markers = [];
 }
 
-function addMarker(results) {
+function addMarker(results, url) {
   var marker = new google.maps.Marker( {
     map: map,
     place: {
       placeId: results[0].place_id,
-      location: results[0].geometry.location
-    }
+      location: results[0].geometry.location,
+    },
+    url: url
   });
   markers.push(marker);
 }
@@ -45,7 +46,6 @@ function sendUserCity () {
         $.post( "/postmethod", {
           javascript_data: JSON.stringify(city)
         });
-
       }
     }
   });
