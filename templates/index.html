@@ -15,15 +15,13 @@
                 padding-bottom: 20px;
             }
         </style>
+        <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css')}}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
         <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3.min.js')}}"></script>
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
         <script>
-          // A $( document ).ready() block.
-          $( document ).ready(function() {
-            updateList(updated_items);
-          });
         </script>
     </head>
     <body>
@@ -45,22 +43,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li>&nbsp;</li>
                 </ul>
                 <form class="navbar-form">
                     <div class="form-group" style="display:inline;">
                         <div class="input-group">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Condition</a></li>
-                                    <li><a href="#">City</a></li>
-                                    <li><a href="#">Inclusion Criteria</a></li>
-                                </ul>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Keyword Search">
+                            <input id="pac-input" type="text" class="form-control" placeholder="Search by location">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
                         </div>
                     </div>
@@ -72,33 +61,20 @@
         <div class="container-fluid" id="main">
             <div class="row">
                 <div class="col-xs-8" id="left">
-
                     <h2>Dementia-related clinical trials in your area</h2>
-
+                    <hr>
                     <!-- item list -->
-                    <div id="study-list">
+                    <div class=study-list id="study-list">
+
+                        <input class="search" />
+                        <span class="sort" data-sort="name">Sort by name</span>
+                        <span class="sort" data-sort="location">Sort by location</span>
+
                         <ul class="list">
                         </ul>
                     </div>
-
-                    <hr>
-                    <!-- /item list -->
-
-                    <p>
-                        <a href="http://www.bootply.com/render/129229">Demo</a> | <a href="http://bootply.com/129229">Source Code</a>
-                    </p>
-
-                    <hr>
-
-                    <p>
-                        <a href="http://bootply.com" target="_ext" class="center-block btn btn-primary">More Bootstrap Snippets on Bootply</a>
-                    </p>
-
-                    <hr>
-
                 </div>
                 <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
-
             </div>
         </div>
         <!-- end template -->
@@ -109,10 +85,9 @@
       </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
-
         <script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js')}}"></script>
-        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&output=embed"></script>
-        <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&extension=.js&output=embed"></script>
+        <script src="{{ url_for('static', filename='js/GoogleMapsScripts.js')}}"></script>
         <script src="{{ url_for('static', filename='js/plugins.js')}}"></script>
         <script src="{{ url_for('static', filename='js/main.js')}}"></script>
         <script src="{{ url_for('static', filename='js/UpdateList.js')}}"></script>

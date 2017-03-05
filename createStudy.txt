@@ -1,0 +1,29 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createStudy`(
+    IN p_name VARCHAR(45),
+    IN p_identifier INT(11),
+    IN p_purpose TEXT
+)
+BEGIN
+    if ( select exists (select 1 from studies where name = p_name) ) THEN
+     
+        select 'Username Exists !!';
+     
+    ELSE
+     
+        insert into studies
+        (
+            name,
+            identifier,
+            purpose
+        )
+        values
+        (
+            p_name,
+            p_identifier,
+            p_purpose
+        );
+     
+    END IF;
+END$$
+DELIMITER ;

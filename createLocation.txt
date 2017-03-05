@@ -1,0 +1,32 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createLocation`(
+    IN p_country VARCHAR(45),
+    IN p_province VARCHAR(45),
+    IN p_city VARCHAR(45),
+    IN p_care-centre VARCHAR(45)
+)
+BEGIN
+    if ( select exists (select 1 from locations where care-centre = p_care-centre) ) THEN
+     
+        select 'Username Exists !!';
+     
+    ELSE
+     
+        insert into studies
+        (
+            country,
+            province,
+            city,
+            care-centre
+        )
+        values
+        (
+            p_country,
+            p_province,
+            p_city,
+            p_care-centre
+        );
+     
+    END IF;
+END$$
+DELIMITER ;
