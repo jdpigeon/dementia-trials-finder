@@ -16,11 +16,10 @@
             }
         </style>
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css')}}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
         <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3.min.js')}}"></script>
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
         <script>
         </script>
     </head>
@@ -83,14 +82,24 @@
       <footer>
         <p>&copy; Company 2015</p>
       </footer>
-    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+    </div> <!-- /container -->
+
+        <!--- external libraries -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
         <script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js')}}"></script>
         <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&extension=.js&output=embed"></script>
-        <script src="{{ url_for('static', filename='js/GoogleMapsScripts.js')}}"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
+        <!--- state -->
+        <script src="{{ url_for('static', filename='js/redux/actions.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/redux/store.js')}}"></script>
+
+        <!-- custom scripts -->
+        <script src="{{ url_for('static', filename='js/database.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/maps.js')}}"></script>
         <script src="{{ url_for('static', filename='js/plugins.js')}}"></script>
-        <script src="{{ url_for('static', filename='js/main.js')}}"></script>
-        <script src="{{ url_for('static', filename='js/UpdateList.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/trialList.js')}}"></script>
 
 
 

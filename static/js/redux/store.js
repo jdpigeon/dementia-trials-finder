@@ -1,28 +1,17 @@
-/**
- * Created by dano on 04/03/17.
- */
-
-var options = {
-  valueNames: [ 'name', 'location', 'purpose', 'centre', 'study_type', 'url', 'recruitment' ],
-
-  item: '<div class="study-item">' +
-    '<header class="study-header">' +
-      '<a class="name" href="https://clinicaltrials.gov/ct2/show/NCT02386670?term=prevention+of+alzheimer%27s+disease&rank=2"></a>' +
-    '</header>' +
-    '<div class="study-meta">' +
-      '<span class="location" href=""></span>' +
-  '<span class="centre"></span>' +
-  '<span class="eligibility"></span>' +
-  '<span class="recruitment"></span>' +
-    '</div>' +
-    '<div class="study-footer">' +
-      '<p class="purpose"></p>' +
-    '</div>' +
-    '<hr>' +
-  '</div>'
+const state = {
+  location: 'Toronto',
+  latLng: new google.maps.LatLng(43.659, -79.389),
+  map: '',
+  markers: [],
+  infowindow: new google.maps.InfoWindow({
+    content: ''
+  }),
+  trials: [],
 };
 
-var values = [
+state.trials = [
+  /*
+
   {
     url: "https://clinicaltrials.gov/ct2/show/NCT02386670?term=prevention+of+alzheimer%27s+disease&rank=2",
     name: "Prevention of Alzheimer's Disease With CR Plus tDCS in Mild Cognitive Impairment and Depression (PACt-MD) (PACt-MD)",
@@ -34,6 +23,7 @@ var values = [
     recruitment: "This study is currently recruiting participants.",
     contact: "Lillian Lourenco, MPH	416-535-8501 ext 30409"
   },
+
   {
     url: "https://clinicaltrials.gov//ct2/show/NCT01646723?term=Dementia&amp;recr=Open&amp;cntry1=NA%3ACA&amp;state1=NA%3ACA%3AON&amp;rank=1",
     name: "Volunteers Adding Life in Dementia",
@@ -157,7 +147,7 @@ var values = [
   },
   {
     url: "https://clinicaltrials.gov//ct2/show/NCT02428387?term=Dementia&amp;recr=Open&amp;cntry1=NA%3ACA&amp;state1=NA%3ACA%3AON&amp;rank=12",
-    name: "",
+    name: "Evaluation of My Tools 4 Care for Family Caregivers of Persons With Dementia",
     purpose: "With the number of Canadians with Alzheimer's disease and related dementias (ADRD) growing, supporting family care partners of persons with ADRD is critical. Family caregivers provide about 90 per cent of in-home care for persons with ADRD, and the care is often difficult due to co-morbidities in persons with ADRD. Family caregivers of older persons with ADRD and multiple chronic conditions (MCC) experience significant, complex, distressing transitions such as changes to their environment, roles and relationships, physical and mental health, isolation, and taking on new tasks. An online Transition Toolkit (My Tools 4 Care) was developed for family caregivers of persons with ADRD and MCC living at home, to support caregivers through transitions and increase their self-efficacy, hope, and quality of life (QOL).Through this pragmatic mixed methods randomized controlled trial the investigators expect to find that family caregivers receiving the online My Tools 4 Care Toolkit will show greater improvement in hope, self-efficacy and QOL, at no additional cost from a societal perspective, compared with those in an educational control group. Following baseline data collection 180 participants will be randomly assigned to one of the groups with repeated measures at one, three and six months.",
     centre: "University of Alberta",
     location: "Hamilton, Ontario, Canada, L8S 4K1",
@@ -217,7 +207,7 @@ var values = [
     centre: "Sunnybrook Health Sciences Centre",
     location: "Toronto, Ontario, Canada, M4N 3M5",
     study_type: "Interventional",
-    eligibility: "50 Years to 95 Years  (Adult, Senior)",
+    eligibility: " Years to 95 Years  (Adult, Senior)",
     recruitment: "This study is not yet open for participant recruitment.",
     contact: "Not Recruiting"
   },
@@ -254,42 +244,5 @@ var values = [
     recruitment: "This study is currently recruiting participants.",
     contact: "Janelle A Bradley, BSc  416-480-6100 ext 3185"
   }
-]
-
-var trialsList = new List('study-list', options, values);
-
-function placeVisibleMarkers () {
-  //deleteMarkers();
-
-  // Loops through every visible trial in list
-  trialsList.matchingItems.forEach(function (item) {
-
-    // Places request
-    var request = {
-      location: map.getCenter(),
-      radius: '1000',
-      query: item.values().centre
-    };
-
-    // Checks that the PlacesServiceStatus is OK, and adds a marker
-    // using the place ID and location from the PlacesService.
-    function callback(results, status) {
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        addMarker(results, item.values().url);
-        setMapOnAll(map);
-      }
-    }
-
-    var service = new google.maps.places.PlacesService(map);
-    service.textSearch(request, callback);
-  });
-
-}
-
-trialsList.on('updated', function () {
-  placeVisibleMarkers();
-});
-
-
-
-
+  */
+];

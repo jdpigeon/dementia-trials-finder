@@ -1,17 +1,6 @@
-
-var lat;
-var lng;
-var map;
-var markers = [];
 var geocoder = new google.maps.Geocoder;
 
-function locationHandler(position)
-{
-  lat = position.coords.latitude;
-  lng = position.coords.longitude;
-}
-
-// Sets the map on all markers in the array.
+// adds every marker in markerlist to map.
 function setMapOnAll(map) {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(map);
@@ -19,40 +8,18 @@ function setMapOnAll(map) {
 }
 
 function deleteMarkers() {
-  setMapOnAll(null);
+  //setMapOnAll(null);
   markers = [];
 }
 
-function addMarker(results, url) {
-  var marker = new google.maps.Marker( {
-    map: map,
-    place: {
-      placeId: results[0].place_id,
-      location: results[0].geometry.location,
-    },
-    url: url
-  });
-  markers.push(marker);
-}
 
-function sendUserCity () {
-  geocoder.geocode({'location': map.getCenter()}, function(results, status) {
-    if (status === 'OK') {
-      if (results[1]) {
-
-        var city = results[1].address_components[2].long_name;
-        console.log(city);
-
-        $.post( "/postmethod", {
-          javascript_data: JSON.stringify(city)
-        });
-      }
-    }
-  });
+// Accepts an AdressComponents Array and finds the correct city name
+function parseCity(addressComponent) {
+  return addressComponent[1].long_name;
 }
 
 
-function createSearch() {
+function createSearchBar() {
 
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
@@ -60,15 +27,14 @@ function createSearch() {
 
 
   // Bias the SearchBox results towards current map's viewport.
-  map.addListener('bounds_changed', function() {
-    searchBox.setBounds(map.getBounds());
+  state.map.addListener('bounds_changed', function() {
+    searchBox.setBounds(state.map.getBounds());
   });
 
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
-
 
     if (places.length == 0) {
       return;
@@ -77,6 +43,7 @@ function createSearch() {
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
     places.forEach(function(place) {
+      console.log(parseCity(place.address_components));
       if (!place.geometry) {
         console.log("Returned place contains no geometry");
         return;
@@ -88,38 +55,32 @@ function createSearch() {
       } else {
         bounds.extend(place.geometry.location);
       }
+      console.log('ran places loop');
+      setLocation(parseCity(place.address_components), bounds);
     });
-    map.fitBounds(bounds);
+
     sendUserCity();
   });
 }
 
 
 $(document).ready(function() {
-  navigator.geolocation.getCurrentPosition(locationHandler);
+  navigator.geolocation.getCurrentPosition(setCoordinates);
   google.maps.event.addDomListener(window, 'load', initialize);
 
   function initialize() {
 
-    /* position Amsterdam */
-    if (lat == null) {
-      lat = 43.6596728;
-      lng = -79.3891647;
-    }
-    var latlng = new google.maps.LatLng(lat, lng);
-
     var mapOptions = {
-      center: latlng,
+      center: state.latLng,
       scrollWheel: false,
       zoom: 13
     };
 
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
-    createSearch();
+    createMap(new google.maps.Map(document.getElementById("map-canvas"), mapOptions));
+    createSearchBar();
     placeVisibleMarkers();
 
-    map.addListener(['center_changed'], function() {
+    state.map.addListener(['center_changed'], function() {
       sendUserCity();
     });
 

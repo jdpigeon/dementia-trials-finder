@@ -3,11 +3,13 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Dano
+    Lazar
+    Daniel
 
 # THANKS
 
-    <name>
+    DementiaHack
 
 # TECHNOLOGY COLOPHON
 
